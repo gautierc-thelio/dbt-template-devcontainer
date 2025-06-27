@@ -1,0 +1,12 @@
+my_project:
+  outputs:
+    dev:
+      dbname: dbt_training_dev
+      host: pg_ctlcluster
+      pass: dev
+      port: 5432
+      schema: raw_jaffle_shop
+      threads: 4
+      type: postgres
+      user: dev
+  target: dev
