@@ -1,0 +1,115 @@
+apiVersion: v3.0.2
+kind: DataContract
+id: 2a8f3f93-8a3d-41a9-b708-8392487abfa1
+version: 1.0.0
+status: active
+
+domain: sales
+dataProduct: sales
+tenant: Thales
+
+description:
+  purpose: Final output table for enriched sales orders for C3 exposure
+  usage: Exposed to external systems such as C3 for sales consumption
+  limitations: Restricted schema and fields for external sharing
+  authoritativeDefinitions:
+    - type: businessDefinition
+      url: https://data.thalesgroup.com/catalog/sales_orders_enriched_c3
+
+servers:
+  - server: local-duckdb-c3
+    type: duckdb
+    path: ./c3-dap-view.duckdb
+    schema: gold_c3
+
+schema:
+  - name: sales_orders_enriched_c3
+    physicalName: sales_orders_enriched
+    physicalType: table
+    businessName: Enriched Sales Orders C3
+    description: Final output table for enriched sales orders for C3 exposure
+    tags: ['sales']
+    dataGranularityDescription: 1 row per order
+    properties:
+      - name: order_id
+        physicalName: order_id
+        logicalType: string
+        description: Unique identifier of the order
+        required: true
+        primaryKey: true
+        primaryKeyPosition: 1
+        classification: public
+        partitioned: false
+        partitionKeyPosition: -1
+        criticalDataElement: true
+      - name: customer_id
+        physicalName: customer_id
+        logicalType: string
+        description: Identifier of the customer
+        required: false
+        primaryKey: false
+        classification: restricted
+        partitioned: false
+        partitionKeyPosition: -1
+        criticalDataElement: false
+      - name: order_date
+        physicalName: order_date
+        logicalType: date
+        description: Date when the order was placed
+        required: false
+        primaryKey: false
+        classification: public
+        partitioned: false
+        partitionKeyPosition: -1
+        criticalDataElement: false
+      - name: order_status
+        physicalName: order_status
+        logicalType: string
+        description: Current status of the order
+        required: false
+        primaryKey: false
+        classification: public
+        partitioned: false
+        partitionKeyPosition: -1
+        criticalDataElement: false
+      - name: total_amount
+        physicalName: total_amount
+        logicalType: number
+        description: Total amount of the order (sum of quantity × unit price)
+        required: false
+        primaryKey: false
+        classification: public
+        partitioned: false
+        partitionKeyPosition: -1
+        criticalDataElement: false
+      - name: meta_ingestion_date
+        physicalName: meta_ingestion_date
+        logicalType: timestamp
+        description: Technical ingestion timestamp for the source data
+        required: false
+        primaryKey: false
+        classification: internal
+        partitioned: false
+        partitionKeyPosition: -1
+        criticalDataElement: false
+
+    quality:
+      - rule: countCheck
+        type: library
+        description: Ensure row count is within expected volume range
+        dimension: completeness
+        method: reconciliation
+        severity: error
+        businessImpact: operational
+        schedule: 0 20 * * *
+        scheduler: cron
+
+team:
+  - username: adupont
+    role: Owner
+    dateIn: "2025-07-22"
+    description: Responsable du pipeline sales
+
+tags:
+  - output
+  - exter

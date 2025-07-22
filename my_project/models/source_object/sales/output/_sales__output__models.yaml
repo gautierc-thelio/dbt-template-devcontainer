@@ -1,0 +1,45 @@
+version: 2
+
+models:
+  - name: sales__sales_orders_enriched
+    description: "Final output table for enriched sales orders"
+    config:
+      alias: sales_orders_enriched
+      tags: ['sales']
+      group: sales
+      access: private
+      materialized: table
+    columns:
+      - name: order_id
+        description: "Unique identifier of the order"
+      - name: customer_id
+        description: "Identifier of the customer"
+      - name: order_date
+        description: "Date when the order was placed"
+      - name: order_status
+        description: "Current status of the order"
+      - name: total_amount
+        description: "Total amount of the order (sum of quantity × unit price)"
+      - name: meta_ingestion_date
+        description: "Technical ingestion timestamp for the source data"
+
+  - name: sales__sales_orders_enriched_c3
+    description: "Final output table for enriched sales orders for C3 exposure"
+    config:
+      alias: sales_orders_enriched
+      tags: ['sales']
+      group: sales
+      access: public
+    columns:
+      - name: order_id
+        description: "Unique identifier of the order"
+      - name: customer_id
+        description: "Identifier of the customer"
+      - name: order_date
+        description: "Date when the order was placed"
+      - name: order_status
+        description: "Current status of the order"
+      - name: total_amount
+        description: "Total amount of the order (sum of quantity × unit price)"
+      - name: meta_ingestion_date
+        description: "Technical ingestion timestamp for the source data"

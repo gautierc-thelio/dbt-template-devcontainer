@@ -1,0 +1,10 @@
+version: 2
+
+models:
+  - name: sales__transform__sales_orders_enriched
+    description: "Enriched sales orders from join with items"
+    config:
+      alias: sales__sales_orders_enriched
+      tags: ['sales']
+      group: sales
+      access: private

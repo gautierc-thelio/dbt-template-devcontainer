@@ -1,0 +1,67 @@
+apiVersion: v3.0.2
+kind: DataContract
+id: 9f7a6b00-1fd3-4896-8c99-001-contract-internal
+version: 1.0.0
+status: active
+
+domain: sales
+dataProduct: sales
+tenant: Thales
+
+description:
+  purpose: Final output table for enriched sales orders
+  usage: Used for internal sales reporting and analysis
+  limitations: Contains only core sales metrics
+  authoritativeDefinitions:
+    - type: businessDefinition
+      url: https://data.thalesgroup.com/catalog/sales_orders_enriched
+
+servers:
+  - server: duckdb-local
+    type: duckdb
+    host: localhost
+    path: ./ec_dap.duckdb
+    schema: gold
+
+schema:
+  - name: sales_orders_enriched
+    physicalName: sales_orders_enriched
+    physicalType: table
+    businessName: Enriched Sales Orders
+    description: Final output table for enriched sales orders
+    tags: ['sales', 'output']
+    dataGranularityDescription: 1 row per order
+    properties:
+      - name: order_id
+        logicalType: string
+        primaryKey: true
+        required: true
+        description: Unique identifier for the order
+        classification: internal
+      - name: customer_id
+        logicalType: string
+        required: true
+        description: Identifier of the customer
+        classification: internal
+      - name: order_date
+        logicalType: date
+        required: true
+        description: Date when the order was placed
+        classification: internal
+      - name: order_status
+        logicalType: string
+        required: true
+        description: Status of the order
+        classification: internal
+      - name: total_amount
+        logicalType: number
+        required: true
+        description: Computed total amount of the order
+        classification: internal
+      - name: meta_ingestion_date
+        logicalType: timestamp
+        required: true
+        description: Date of ingestion into the system
+        classification: internal
+
+contractCreatedTs: "2025-07-22T10:30:00+02:00"

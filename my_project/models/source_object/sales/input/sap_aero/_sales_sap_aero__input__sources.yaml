@@ -1,0 +1,17 @@
+version: 2
+
+sources:
+  - name: seed_sources
+    schema: ec_dap
+    description: "Sources simulées via seeds pour dp sales"
+    tables:
+      - name: sales_orders
+        description: "Fake orders from CSV"
+        columns:
+          - name: order_id
+            tests: [not_null, unique]
+      - name: sales_items
+        description: "Fake items from CSV"
+        columns:
+          - name: item_id
+            tests: [not_null, unique]

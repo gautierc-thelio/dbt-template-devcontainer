@@ -1,0 +1,4 @@
+order_id,customer_id,order_date,order_status,meta_ingestion_date
+1,1001,2024-06-01,shipped,2025-07-20 12:00:00
+2,1002,2024-06-03,processing,2025-07-20 12:00:00
+3,1003,2024-06-04,cancelled,2025-07-20 12:00:00
