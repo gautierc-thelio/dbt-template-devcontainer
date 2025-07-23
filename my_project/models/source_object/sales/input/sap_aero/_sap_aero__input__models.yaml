@@ -1,17 +1,17 @@
 version: 2
 
 models:
-  - name: sales_sap_aero__input__sales_orders
+  - name: input__sales_orders_aerobase
     description: "Input model for sales orders"
     config:
-      alias: sales_sap_aero__sales_orders
+      alias: sales_orders_aerobase
       tags: ['sales']
       group: sales
       access: private
-  - name: sales_sap_aero__input__sales_items
+  - name: input__sales_items_aerobase
     description: "Input model for sales items"
     config:
-      alias: sales_sap_aero__sales_items
+      alias: sales_items_aerobase
       tags: ['sales']
       group: sales
       access: private

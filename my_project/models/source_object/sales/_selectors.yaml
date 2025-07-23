@@ -3,4 +3,4 @@ selectors:
     description: "Selector for all models in the sales DP"
     definition:
       tag: sales
-      value: transformation/models/source_object/dp_sales/
+      value: transformation/models/source_object/sales/

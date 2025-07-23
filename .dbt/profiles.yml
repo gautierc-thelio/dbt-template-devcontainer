@@ -9,4 +9,9 @@ my_project:
       threads: 4
       type: postgres
       user: dev
-  target: dev
+    dev-duckdb:
+      type: duckdb
+      path: ./ec_dap.duckdb
+      schema: ec_dap
+      threads: 1
+  target: dev-duckdb

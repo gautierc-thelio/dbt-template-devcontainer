@@ -59,7 +59,7 @@ schema:
         description: Computed total amount of the order
         classification: internal
       - name: meta_ingestion_date
-        logicalType: timestamp
+        logicalType: date
         required: true
         description: Date of ingestion into the system
         classification: internal

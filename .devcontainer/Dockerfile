@@ -7,6 +7,11 @@ RUN apt-get update && apt-get install -y \
     postgresql-15 postgresql-client-15 postgresql-contrib-15 \
  && apt-get clean && rm -rf /var/lib/apt/lists/*
 
+ # Après l’installation de PostgreSQL et dbt-postgres
+RUN curl -L -o duckdb https://github.com/duckdb/duckdb/releases/download/v0.10.1/duckdb_cli-linux-amd64 \
+  && chmod +x duckdb \
+  && mv duckdb /usr/local/bin/
+  
  # Configurer PostgreSQL pour autoriser les connexions extérieures
 RUN echo "listen_addresses = '*'" >> /etc/postgresql/15/main/postgresql.conf && \
     echo "host all all all md5" >> /etc/postgresql/15/main/pg_hba.conf

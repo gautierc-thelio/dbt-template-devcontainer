@@ -1,7 +1,7 @@
 version: 2
 
 models:
-  - name: sales__sales_orders_enriched
+  - name: output__sales_orders_enriched
     description: "Final output table for enriched sales orders"
     config:
       alias: sales_orders_enriched
@@ -23,10 +23,10 @@ models:
       - name: meta_ingestion_date
         description: "Technical ingestion timestamp for the source data"
 
-  - name: sales__sales_orders_enriched_c3
+  - name: output__sales_orders_enriched_c3
     description: "Final output table for enriched sales orders for C3 exposure"
     config:
-      alias: sales_orders_enriched
+      alias: sales_orders_enriched_c3
       tags: ['sales']
       group: sales
       access: public
